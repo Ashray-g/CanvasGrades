@@ -1,0 +1,17 @@
+{
+  "name": "grades-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && node server.js",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "predeploy": "npm run build",
+    "deploy": "cd client && npm run deploy",
+    "setup": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "gh-pages": "^6.1.1"
+  }
+}
