@@ -267,15 +267,40 @@ function App() {
                           className="course-checkbox"
                         />
                         <label htmlFor={`course-${course.id}`} className="course-name">
-                          {courseNames[course.id] || course.name}
+                          {editingCourse === course.id ? (
+                            <input
+                              type="text"
+                              value={editedCourseName}
+                              onChange={(e) => setEditedCourseName(e.target.value)}
+                              onBlur={saveEditedCourseName}
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                  saveEditedCourseName();
+                                }
+                              }}
+                              autoFocus
+                            />
+                          ) : (
+                            courseNames[course.id] || course.name
+                          )}
                         </label>
-                        <button 
-                          className="edit-button" 
-                          onClick={() => startEditingCourse(course.id, courseNames[course.id] || course.name)}
-                          aria-label="Edit course name"
-                        >
-                          <Edit2 size={16} />
-                        </button>
+                        {editingCourse === course.id ? (
+                          <button 
+                            className="edit-button" 
+                            onClick={saveEditedCourseName}
+                            aria-label="Save course name"
+                          >
+                            <Check size={16} />
+                          </button>
+                        ) : (
+                          <button 
+                            className="edit-button" 
+                            onClick={() => startEditingCourse(course.id, courseNames[course.id] || course.name)}
+                            aria-label="Edit course name"
+                          >
+                            <Edit2 size={16} />
+                          </button>
+                        )}
                       </div>
                     ))}
                   </div>
